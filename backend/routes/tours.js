@@ -22,15 +22,16 @@ router.put("/:id", adminAuth, updateTour);
 // delete tour
 router.delete("/:id", adminAuth, deleteTour);
 
-// get single tour
-router.get("/:id", getSingleTour);
-
-// get all tours
-router.get("/", getAllTour);
 
 // get tour by search
 router.get("/search/getTourBySearch", getTourBySearch);
 router.get("/search/getFeaturedTours", getFeaturedTour);
 router.get("/search/getTourCount", getTourCount);
+
+// get single tour
+router.get("/:id", getSingleTour);
+
+// get all tours
+router.get("/", getAllTour);
 
 export default router;
