@@ -27,5 +27,6 @@
     "stream-chat": "^9.6.1",
     "twilio": "^5.7.1"
   },
+  "devDependencies": {},
   "description": ""
 }

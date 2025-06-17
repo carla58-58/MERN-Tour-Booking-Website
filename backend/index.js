@@ -19,7 +19,7 @@ const corsOptions = {
 
 //for testing api
 //app.get("/", (req,res)=>{ 
-//  res.send("api is working");
+  //res.send("api is working");
 //});
 
 // database connection
