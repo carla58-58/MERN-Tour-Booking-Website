@@ -16,19 +16,18 @@ const router = express.Router();
 // create new tour
 router.post("/", adminAuth, createTour);
 
-// update  tour
+// update tour
 router.put("/:id", adminAuth, updateTour);
 
 // delete tour
 router.delete("/:id", adminAuth, deleteTour);
 
-
-// get tour by search
+// --- Place all /search routes BEFORE /:id ---
 router.get("/search/getTourBySearch", getTourBySearch);
 router.get("/search/getFeaturedTours", getFeaturedTour);
 router.get("/search/getTourCount", getTourCount);
 
-// get single tour
+// get single tour (keep this AFTER all /search routes)
 router.get("/:id", getSingleTour);
 
 // get all tours
