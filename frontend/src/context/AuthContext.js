@@ -1,15 +1,15 @@
-import { createContext, useEffect, useReducer } from "react";
+import React, { createContext, useReducer } from "react";
 
-const initial_state = {
-  user:
-    localStorage.getItem("user") !== undefined
-      ? JSON.parse(localStorage.getItem("user"))
-      : null,
+const storedUser = localStorage.getItem("user");
+const initialUser = storedUser && storedUser !== "undefined" ? JSON.parse(storedUser) : null;
+
+const INITIAL_STATE = {
+  user: initialUser,
   loading: false,
   error: null,
 };
 
-export const AuthContext = createContext(initial_state);
+export const AuthContext = createContext(INITIAL_STATE);
 
 const AuthReducer = (state, action) => {
   switch (action.type) {
@@ -31,29 +31,26 @@ const AuthReducer = (state, action) => {
         loading: false,
         error: action.payload,
       };
-    case "REGISTER_SUCCESS":
-      return {
-        user: null,
-        loading: false,
-        error: null,
-      };
     case "LOGOUT":
       return {
         user: null,
         loading: false,
         error: null,
       };
-
     default:
       return state;
   }
 };
 
 export const AuthContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(AuthReducer, initial_state);
+  const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
 
-  useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(state.user));
+  React.useEffect(() => {
+    if (state.user) {
+      localStorage.setItem("user", JSON.stringify(state.user));
+    } else {
+      localStorage.removeItem("user");
+    }
   }, [state.user]);
 
   return (
